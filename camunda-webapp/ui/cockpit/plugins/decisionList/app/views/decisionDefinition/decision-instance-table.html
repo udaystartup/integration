@@ -1,0 +1,107 @@
+<!-- # CE - camunda-bpm-webapp/webapp/src/main/resources-plugin/decisionList/app/views/decisionDefinition/decision-instance-table.html -->
+<div cam-widget-search
+     cam-widget-search-valid-searches="decisionSearchConfig.searches"
+     cam-widget-search-translations="decisionSearchConfig.tooltips"
+     cam-widget-search-types="decisionSearchConfig.types"
+     cam-widget-search-operators="decisionSearchConfig.operators"
+     cam-widget-search-mode="filter"
+     cam-widget-search-storage-group="'DI'">
+</div>
+
+<div cam-widget-loader
+     loading-state="{{ loadingState }}"
+     text-empty="No decision instances matched by current filter.">
+  <table class="decision-instances cam-table cam-fixed-layout">
+    <thead>
+      <tr>
+        <th class="instance-id">ID</th>
+        <th class="start-time">Evaluation Time</th>
+        <th class="definition-key">Calling Process/Case</th>
+        <th class="instance-id">Calling Instance ID</th>
+        <th class="activity-id">Activity ID</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr ng-repeat="decisionInstance in decisionInstances">
+        <td class="instance-id"
+            cam-widget-clipboard="decisionInstance.id">
+          <a ng-href="#/decision-instance/{{ decisionInstance.id }}" title="{{ decisionInstance.id }}">
+            {{ decisionInstance.id }}
+          </a>
+        </td>
+
+        <td class="start-time"
+            cam-widget-clipboard="decisionInstance.evaluationTime">
+          {{ decisionInstance.evaluationTime | camDate }}
+        </td>
+
+        <td class="definition-key"
+            ng-if="decisionInstance.processDefinitionKey"
+            cam-widget-clipboard="decisionInstance.processDefinitionKey">
+          <a ng-href="{{ getProcessDefinitionLink(decisionInstance) }}">
+            {{ decisionInstance.processDefinitionKey }}
+          </a>
+        </td>
+        <td class="definition-key"
+            ng-if="decisionInstance.caseDefinitionKey"
+            cam-widget-clipboard="decisionInstance.caseDefinitionKey">
+          <a ng-if="hasCasePlugin"
+             ng-href="#/case-definition/{{ decisionInstance.caseDefinitionId }}?searchQuery={{ getActivitySearch(decisionInstance) }}">
+            {{ decisionInstance.caseDefinitionKey }}
+          </a>
+          <span ng-if="!hasCasePlugin">
+            {{ decisionInstance.caseDefinitionKey }}
+          </span>
+        </td>
+        <td class="definition-key"
+            ng-if="!decisionInstance.processDefinitionKey && !decisionInstance.caseDefinitionKey">
+        </td>
+
+        <td class="instance-id"
+            ng-if="decisionInstance.processInstanceId"
+            cam-widget-clipboard="decisionInstance.processInstanceId">
+          <a ng-href="{{ getProcessInstanceLink(decisionInstance) }}">
+            {{ decisionInstance.processInstanceId }}
+          </a>
+        </td>
+        <td class="instance-id"
+            ng-if="decisionInstance.caseInstanceId"
+            cam-widget-clipboard="decisionInstance.caseInstanceId">
+          <a ng-if="hasCasePlugin"
+             ng-href="#/case-instance/{{ decisionInstance.caseInstanceId }}?searchQuery={{ getActivitySearch(decisionInstance) }}">
+            {{ decisionInstance.caseInstanceId }}
+          </a>
+          <span ng-if="!hasCasePlugin">
+            {{ decisionInstance.caseInstanceId }}
+          </span>
+        </td>
+        <td class="instance-id"
+            ng-if="!decisionInstance.processInstanceId && !decisionInstance.caseInstanceId">
+        </td>
+
+        <td class="activity-id"
+            ng-if="decisionInstance.activityId"
+            cam-widget-clipboard="decisionInstance.activityId">
+          {{ decisionInstance.activityId }}
+        </td>
+        <td class="activity-id"
+            ng-if="!decisionInstance.activityId">
+        </td>
+
+      </tr>
+    </tbody>
+  </table>
+
+  <pagination ng-if="pages.total > pages.size"
+              class="pagination-sm"
+
+              page="pages.current"
+              ng-model="pages.current"
+
+              total-items="pages.total"
+              items-per-page="pages.size"
+
+              max-size="7"
+              boundary-links="true"></pagination>
+</div>
+<!-- / CE - camunda-bpm-webapp/webapp/src/main/resources-plugin/decisionList/app/views/decisionDefinition/decision-instance-table.html -->

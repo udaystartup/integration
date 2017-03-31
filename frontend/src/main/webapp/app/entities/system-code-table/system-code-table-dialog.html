@@ -1,0 +1,113 @@
+
+<form name="editForm" role="form" novalidate ng-submit="vm.save()" show-validation>
+
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+                ng-click="vm.clear()">&times;</button>
+        <h4 class="modal-title" id="mySystemCodeTableLabel" data-translate="frontendApp.systemCodeTable.home.createOrEditLabel">Create or edit a System Code Table</h4>
+    </div>
+    <div class="modal-body">
+        <jhi-alert-error></jhi-alert-error>
+        <div class="form-group" ng-show="vm.systemCodeTable.id">
+            <label for="id" data-translate="global.field.id">ID</label>
+            <input type="text" class="form-control" id="id" name="id"
+                    ng-model="vm.systemCodeTable.id" readonly />
+        </div>
+        <div class="form-group">
+            <label class="control-label" data-translate="frontendApp.systemCodeTable.codeTableName" for="field_codeTableName">Code Table Name</label>
+            <input type="text" class="form-control" name="codeTableName" id="field_codeTableName"
+                    ng-model="vm.systemCodeTable.codeTableName"
+                    required ng-minlength="2"/>
+            <div ng-show="editForm.codeTableName.$invalid">
+                <p class="help-block"
+                    ng-show="editForm.codeTableName.$error.required" data-translate="entity.validation.required">
+                    This field is required.
+                </p>
+                <p class="help-block"
+                    ng-show="editForm.codeTableName.$error.minlength" data-translate="entity.validation.minlength" translate-value-min="2">
+                    This field is required to be at least 2 characters.
+                </p>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label" data-translate="frontendApp.systemCodeTable.codeTableDesc" for="field_codeTableDesc">Code Table Desc</label>
+            <input type="text" class="form-control" name="codeTableDesc" id="field_codeTableDesc"
+                    ng-model="vm.systemCodeTable.codeTableDesc"
+                    required ng-minlength="2"/>
+            <div ng-show="editForm.codeTableDesc.$invalid">
+                <p class="help-block"
+                    ng-show="editForm.codeTableDesc.$error.required" data-translate="entity.validation.required">
+                    This field is required.
+                </p>
+                <p class="help-block"
+                    ng-show="editForm.codeTableDesc.$error.minlength" data-translate="entity.validation.minlength" translate-value-min="2">
+                    This field is required to be at least 2 characters.
+                </p>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label" data-translate="frontendApp.systemCodeTable.codeTableEntry" for="field_codeTableEntry">Code Table Entry</label>
+            <input type="text" class="form-control" name="codeTableEntry" id="field_codeTableEntry"
+                    ng-model="vm.systemCodeTable.codeTableEntry"
+                    required ng-minlength="1"/>
+            <div ng-show="editForm.codeTableEntry.$invalid">
+                <p class="help-block"
+                    ng-show="editForm.codeTableEntry.$error.required" data-translate="entity.validation.required">
+                    This field is required.
+                </p>
+                <p class="help-block"
+                    ng-show="editForm.codeTableEntry.$error.minlength" data-translate="entity.validation.minlength" translate-value-min="1">
+                    This field is required to be at least 1 characters.
+                </p>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label" data-translate="frontendApp.systemCodeTable.codeTableEntryDesc" for="field_codeTableEntryDesc">Code Table Entry Desc</label>
+            <input type="text" class="form-control" name="codeTableEntryDesc" id="field_codeTableEntryDesc"
+                    ng-model="vm.systemCodeTable.codeTableEntryDesc"
+                    required ng-minlength="1"/>
+            <div ng-show="editForm.codeTableEntryDesc.$invalid">
+                <p class="help-block"
+                    ng-show="editForm.codeTableEntryDesc.$error.required" data-translate="entity.validation.required">
+                    This field is required.
+                </p>
+                <p class="help-block"
+                    ng-show="editForm.codeTableEntryDesc.$error.minlength" data-translate="entity.validation.minlength" translate-value-min="1">
+                    This field is required to be at least 1 characters.
+                </p>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label" data-translate="frontendApp.systemCodeTable.activeIndicator" for="field_activeIndicator">Active Indicator</label>
+                <input type="checkbox" name="activeIndicator" id="field_activeIndicator"
+                          ng-model="vm.systemCodeTable.activeIndicator"/>
+            <div ng-show="editForm.activeIndicator.$invalid">
+                <p class="help-block"
+                    ng-show="editForm.activeIndicator.$error.required" data-translate="entity.validation.required">
+                    This field is required.
+                </p>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label" data-translate="frontendApp.systemCodeTable.tenantID" for="field_tenantID">Tenant ID</label>
+            <input type="text" class="form-control" name="tenantID" id="field_tenantID"
+                    ng-model="vm.systemCodeTable.tenantID"
+                    required/>
+            <div ng-show="editForm.tenantID.$invalid">
+                <p class="help-block"
+                    ng-show="editForm.tenantID.$error.required" data-translate="entity.validation.required">
+                    This field is required.
+                </p>
+            </div>
+        </div>
+
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="vm.clear()">
+            <span class="glyphicon glyphicon-ban-circle"></span>&nbsp;<span data-translate="entity.action.cancel">Cancel</span>
+        </button>
+        <button type="submit" ng-disabled="editForm.$invalid || vm.isSaving" class="btn btn-primary">
+            <span class="glyphicon glyphicon-save"></span>&nbsp;<span data-translate="entity.action.save">Save</span>
+        </button>
+    </div>
+</form>

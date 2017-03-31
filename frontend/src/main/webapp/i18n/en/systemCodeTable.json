@@ -1,0 +1,31 @@
+{
+    "frontendApp": {
+        "systemCodeTable" : {
+            "home": {
+                "title": "System Code Tables",
+                "createLabel": "Create a new System Code Table",
+                "createOrEditLabel": "Create or edit a System Code Table",
+                "search": "Search for System Code Table"
+            },
+            "delete": {
+                "question": "Are you sure you want to delete System Code Table {{ id }}?"
+            },
+            "detail": {
+                "title": "System Code Table"
+            },
+            "codeTableName": "Code Table Name",
+            "codeTableDesc": "Code Table Desc",
+            "codeTableEntry": "Code Table Entry",
+            "codeTableEntryDesc": "Code Table Entry Desc",
+            "activeIndicator": "Active Indicator",
+            "tenantID": "Tenant ID"
+        }
+    },
+    "coreengineApp": {
+        "systemCodeTable" : {
+            "created": "A new System Code Table is created with identifier {{ param }}",
+            "updated": "A System Code Table is updated with identifier {{ param }}",
+            "deleted": "A System Code Table is deleted with identifier {{ param }}"
+        }
+    }
+}

@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" id="Definitions_1" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="1.7.2">
+  <bpmn:process id="MaintainCodeTableData" name="Maintain Code Table Data" isExecutable="false">
+    <bpmn:startEvent id="StartMaintainCodeTableData" name="Start Maintain Code Table Data">
+      <bpmn:outgoing>SequenceFlow_18vd7f7</bpmn:outgoing>
+    </bpmn:startEvent>
+    <bpmn:sequenceFlow id="SequenceFlow_18vd7f7" sourceRef="StartMaintainCodeTableData" targetRef="Task_1od6j9w" />
+    <bpmn:serviceTask id="Task_1od6j9w" name="List System Code Table Values">
+      <bpmn:incoming>SequenceFlow_18vd7f7</bpmn:incoming>
+      <bpmn:outgoing>SequenceFlow_0zbhelq</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:userTask id="Task_0ogqab3" name="Create new code table entry ">
+      <bpmn:incoming>SequenceFlow_1nhuynu</bpmn:incoming>
+      <bpmn:outgoing>SequenceFlow_07qm0z8</bpmn:outgoing>
+    </bpmn:userTask>
+    <bpmn:endEvent id="EndEvent_1ryohs1" name="End Maintain Code Table Data">
+      <bpmn:incoming>SequenceFlow_0ulwc4j</bpmn:incoming>
+      <bpmn:incoming>SequenceFlow_07qm0z8</bpmn:incoming>
+      <bpmn:incoming>SequenceFlow_1ptqix3</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:sequenceFlow id="SequenceFlow_0zbhelq" sourceRef="Task_1od6j9w" targetRef="ExclusiveGateway_1ic32op" />
+    <bpmn:sequenceFlow id="SequenceFlow_1nhuynu" name="Add" sourceRef="ExclusiveGateway_1ic32op" targetRef="Task_0ogqab3" />
+    <bpmn:complexGateway id="ExclusiveGateway_1ic32op" name="Select screen operation ">
+      <bpmn:incoming>SequenceFlow_0zbhelq</bpmn:incoming>
+      <bpmn:outgoing>SequenceFlow_1nhuynu</bpmn:outgoing>
+      <bpmn:outgoing>SequenceFlow_1lxqcmk</bpmn:outgoing>
+      <bpmn:outgoing>SequenceFlow_1cm6ayh</bpmn:outgoing>
+    </bpmn:complexGateway>
+    <bpmn:sequenceFlow id="SequenceFlow_1lxqcmk" name="Edit" sourceRef="ExclusiveGateway_1ic32op" targetRef="Task_0wvwzos" />
+    <bpmn:sequenceFlow id="SequenceFlow_1cm6ayh" name="Delete" sourceRef="ExclusiveGateway_1ic32op" targetRef="Task_184bwed" />
+    <bpmn:sequenceFlow id="SequenceFlow_0ulwc4j" sourceRef="Task_0wvwzos" targetRef="EndEvent_1ryohs1" />
+    <bpmn:sequenceFlow id="SequenceFlow_07qm0z8" sourceRef="Task_0ogqab3" targetRef="EndEvent_1ryohs1" />
+    <bpmn:sequenceFlow id="SequenceFlow_1ptqix3" sourceRef="Task_184bwed" targetRef="EndEvent_1ryohs1" />
+    <bpmn:userTask id="Task_0wvwzos" name="Update existing code table entry">
+      <bpmn:incoming>SequenceFlow_1lxqcmk</bpmn:incoming>
+      <bpmn:outgoing>SequenceFlow_0ulwc4j</bpmn:outgoing>
+    </bpmn:userTask>
+    <bpmn:userTask id="Task_184bwed" name="Delete existing code table entry">
+      <bpmn:incoming>SequenceFlow_1cm6ayh</bpmn:incoming>
+      <bpmn:outgoing>SequenceFlow_1ptqix3</bpmn:outgoing>
+    </bpmn:userTask>
+  </bpmn:process>
+  <bpmndi:BPMNDiagram id="BPMNDiagram_1">
+    <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="MaintainCodeTableData">
+      <bpmndi:BPMNShape id="_BPMNShape_StartEvent_2" bpmnElement="StartMaintainCodeTableData">
+        <dc:Bounds x="190" y="290" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="168" y="326" width="81" height="24" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="SequenceFlow_18vd7f7_di" bpmnElement="SequenceFlow_18vd7f7">
+        <di:waypoint xsi:type="dc:Point" x="226" y="308" />
+        <di:waypoint xsi:type="dc:Point" x="317" y="308" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="271.5" y="287" width="0" height="12" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="ServiceTask_132rgbg_di" bpmnElement="Task_1od6j9w">
+        <dc:Bounds x="317" y="268" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="UserTask_0mnvsmh_di" bpmnElement="Task_0ogqab3">
+        <dc:Bounds x="666" y="171" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="EndEvent_1ryohs1_di" bpmnElement="EndEvent_1ryohs1">
+        <dc:Bounds x="944" y="290" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="922" y="330" width="81" height="24" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="SequenceFlow_0zbhelq_di" bpmnElement="SequenceFlow_0zbhelq">
+        <di:waypoint xsi:type="dc:Point" x="417" y="308" />
+        <di:waypoint xsi:type="dc:Point" x="522" y="308" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="469.5" y="287" width="0" height="12" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="SequenceFlow_1nhuynu_di" bpmnElement="SequenceFlow_1nhuynu">
+        <di:waypoint xsi:type="dc:Point" x="546" y="284" />
+        <di:waypoint xsi:type="dc:Point" x="546" y="211" />
+        <di:waypoint xsi:type="dc:Point" x="666" y="211" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="593" y="216" width="19" height="12" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="ComplexGateway_0ejmj66_di" bpmnElement="ExclusiveGateway_1ic32op">
+        <dc:Bounds x="522" y="283" width="50" height="50" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="462" y="332" width="67" height="24" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="SequenceFlow_1lxqcmk_di" bpmnElement="SequenceFlow_1lxqcmk">
+        <di:waypoint xsi:type="dc:Point" x="572" y="308" />
+        <di:waypoint xsi:type="dc:Point" x="619" y="308" />
+        <di:waypoint xsi:type="dc:Point" x="619" y="308" />
+        <di:waypoint xsi:type="dc:Point" x="666" y="308" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="591" y="314" width="18" height="12" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="SequenceFlow_1cm6ayh_di" bpmnElement="SequenceFlow_1cm6ayh">
+        <di:waypoint xsi:type="dc:Point" x="547" y="333" />
+        <di:waypoint xsi:type="dc:Point" x="547" y="416" />
+        <di:waypoint xsi:type="dc:Point" x="666" y="416" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="586" y="396" width="31" height="12" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="SequenceFlow_0ulwc4j_di" bpmnElement="SequenceFlow_0ulwc4j">
+        <di:waypoint xsi:type="dc:Point" x="766" y="308" />
+        <di:waypoint xsi:type="dc:Point" x="944" y="308" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="855" y="287" width="0" height="12" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="SequenceFlow_07qm0z8_di" bpmnElement="SequenceFlow_07qm0z8">
+        <di:waypoint xsi:type="dc:Point" x="766" y="211" />
+        <di:waypoint xsi:type="dc:Point" x="825" y="211" />
+        <di:waypoint xsi:type="dc:Point" x="825" y="308" />
+        <di:waypoint xsi:type="dc:Point" x="944" y="308" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="840" y="253.5" width="0" height="12" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="SequenceFlow_1ptqix3_di" bpmnElement="SequenceFlow_1ptqix3">
+        <di:waypoint xsi:type="dc:Point" x="766" y="416" />
+        <di:waypoint xsi:type="dc:Point" x="825" y="416" />
+        <di:waypoint xsi:type="dc:Point" x="825" y="308" />
+        <di:waypoint xsi:type="dc:Point" x="944" y="308" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="840" y="356" width="0" height="12" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="UserTask_1r13co6_di" bpmnElement="Task_0wvwzos">
+        <dc:Bounds x="666" y="269" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="UserTask_1dmtxrf_di" bpmnElement="Task_184bwed">
+        <dc:Bounds x="666" y="377" width="100" height="80" />
+      </bpmndi:BPMNShape>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn:definitions>

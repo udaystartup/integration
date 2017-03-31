@@ -1,0 +1,43 @@
+
+<div>
+    <h2><span data-translate="frontendApp.systemCodeTable.detail.title">System Code Table</span> {{vm.systemCodeTable.id}}</h2>
+    <hr>
+    <jhi-alert-error></jhi-alert-error>
+    <dl class="dl-horizontal jh-entity-details">
+        <dt><span data-translate="frontendApp.systemCodeTable.codeTableName">Code Table Name</span></dt>
+        <dd>
+            <span>{{vm.systemCodeTable.codeTableName}}</span>
+        </dd>
+        <dt><span data-translate="frontendApp.systemCodeTable.codeTableDesc">Code Table Desc</span></dt>
+        <dd>
+            <span>{{vm.systemCodeTable.codeTableDesc}}</span>
+        </dd>
+        <dt><span data-translate="frontendApp.systemCodeTable.codeTableEntry">Code Table Entry</span></dt>
+        <dd>
+            <span>{{vm.systemCodeTable.codeTableEntry}}</span>
+        </dd>
+        <dt><span data-translate="frontendApp.systemCodeTable.codeTableEntryDesc">Code Table Entry Desc</span></dt>
+        <dd>
+            <span>{{vm.systemCodeTable.codeTableEntryDesc}}</span>
+        </dd>
+        <dt><span data-translate="frontendApp.systemCodeTable.activeIndicator">Active Indicator</span></dt>
+        <dd>
+            <span>{{vm.systemCodeTable.activeIndicator}}</span>
+        </dd>
+        <dt><span data-translate="frontendApp.systemCodeTable.tenantID">Tenant ID</span></dt>
+        <dd>
+            <span>{{vm.systemCodeTable.tenantID}}</span>
+        </dd>
+    </dl>
+
+    <button type="submit"
+            ui-sref="{{ vm.previousState }}"
+            class="btn btn-info">
+        <span class="glyphicon glyphicon-arrow-left"></span>&nbsp;<span data-translate="entity.action.back"> Back</span>
+    </button>
+
+    <button type="button" ui-sref="system-code-table-detail.edit({id:vm.systemCodeTable.id})" class="btn btn-primary">
+        <span class="glyphicon glyphicon-pencil"></span>
+        <span class="hidden-sm-down" data-translate="entity.action.edit"> Edit</span>
+    </button>
+</div>
