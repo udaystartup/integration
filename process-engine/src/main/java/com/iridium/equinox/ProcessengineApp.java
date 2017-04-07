@@ -26,7 +26,6 @@ import java.util.Collection;
 @EnableAutoConfiguration(exclude = {MetricFilterAutoConfiguration.class, MetricRepositoryAutoConfiguration.class})
 @EnableConfigurationProperties({LiquibaseProperties.class, ApplicationProperties.class})
 @EnableDiscoveryClient
-@EnableProcessApplication("processengine")
 public class ProcessengineApp {
 
     private static final Logger log = LoggerFactory.getLogger(ProcessengineApp.class);
@@ -64,7 +63,7 @@ public class ProcessengineApp {
      * @throws UnknownHostException if the local host name could not be resolved into an address
      */
     public static void main(String[] args) throws UnknownHostException {
-        SpringApplication app = new SpringApplication(ProcessengineApp.class);
+        SpringApplication app = new SpringApplication(ProcessengineApp.class, args);
         DefaultProfileUtil.addDefaultProfile(app);
         Environment env = app.run(args).getEnvironment();
         String protocol = "http";
@@ -88,5 +87,10 @@ public class ProcessengineApp {
         log.info("\n----------------------------------------------------------\n\t" +
                 "Config Server: \t{}\n----------------------------------------------------------",
             configServerStatus == null ? "Not found or not setup for this application" : configServerStatus);
+
+         @PostConstruct
+        public void startProcess() {
+            runtimeService.startProcessInstanceByKey("loanRequest");
+        }
     }
 }
