@@ -63,7 +63,7 @@ public class ProcessengineApp {
      * @throws UnknownHostException if the local host name could not be resolved into an address
      */
     public static void main(String[] args) throws UnknownHostException {
-        SpringApplication app = new SpringApplication(ProcessengineApp.class, args);
+        SpringApplication app = new SpringApplication(ProcessengineApp.class);
         DefaultProfileUtil.addDefaultProfile(app);
         Environment env = app.run(args).getEnvironment();
         String protocol = "http";
@@ -88,9 +88,9 @@ public class ProcessengineApp {
                 "Config Server: \t{}\n----------------------------------------------------------",
             configServerStatus == null ? "Not found or not setup for this application" : configServerStatus);
 
-         @PostConstruct
-        public void startProcess() {
-            runtimeService.startProcessInstanceByKey("loanRequest");
-        }
+//        @PostConstruct
+//        public void startProcess(){
+//            runtimeService.startProcessInstanceByKey("loanRequest");
+//        }
     }
 }

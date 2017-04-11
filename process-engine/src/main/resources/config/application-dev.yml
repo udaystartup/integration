@@ -147,12 +147,3 @@ jhipster:
 application:
 
 
-logging:
-    level:
-        org: INFO
-            camunda:
-                    bpm: INFO
-                        example : DEBUG
-camunda:
-    bpm:
-        history-level: audit
