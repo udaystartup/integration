@@ -17,21 +17,19 @@ eureka:
     client:
         enabled: false
     instance:
-        appname: frontend
-        instanceId: frontend:${spring.application.instance-id:${random.value}}
+        appname: activitiboot
+        instanceId: activitiboot:${spring.application.instance-id:${random.value}}
 
 spring:
     application:
-        name: frontend
-    autoconfigure:
-        exclude: org.springframework.boot.autoconfigure.data.cassandra.CassandraDataAutoConfiguration, org.springframework.boot.autoconfigure.cassandra.CassandraAutoConfiguration
+        name: activitiboot
     jackson:
         serialization.write_dates_as_timestamps: false
     cache:
         type: none
     datasource:
         type: com.zaxxer.hikari.HikariDataSource
-        url: jdbc:h2:mem:frontend;DB_CLOSE_DELAY=-1
+        url: jdbc:h2:mem:activitiboot;DB_CLOSE_DELAY=-1
         name:
         username:
         password:
@@ -52,14 +50,6 @@ spring:
             hibernate.generate_statistics: true
             hibernate.hbm2ddl.auto: validate
     data:
-        cassandra:
-            contactPoints: localhost
-            port: 0
-            protocolVersion: V4
-            compression: NONE
-            keyspaceName: cassandra_unit_keyspace
-            repositories:
-                enabled: false
         elasticsearch:
             cluster-name:
             cluster-nodes:
@@ -102,7 +92,7 @@ jhipster:
     security:
         authentication:
             jwt:
-                secret: ad071a95b1a832ed55edf7cc7693e6e1614d887f
+                secret: 42517604d836e5de826255b28f4aa9bdcf0b99fe
                 # Token is valid 24 hours
                 token-validity-in-seconds: 86400
     metrics: # DropWizard Metrics configuration, used by MetricsConfiguration
@@ -118,4 +108,3 @@ jhipster:
 # ===================================================================
 
 application:
-

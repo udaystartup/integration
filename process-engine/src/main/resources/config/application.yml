@@ -46,6 +46,7 @@ ribbon:
 #                        timeoutInMilliseconds: 10000
 
 management:
+    port: 9081 
     security:
         roles: ADMIN
     context-path: /management
@@ -56,6 +57,8 @@ spring:
     application:
         name: processengine
     jackson:
+        INDENT_OUTPUT: true 
+        ORDER_MAP_ENTRIES_BY_KEYS: true
         serialization.write_dates_as_timestamps: false
     jpa:
         open-in-view: false
@@ -80,10 +83,11 @@ security:
         enabled: false
 
 server:
+    port: 9080
     session:
         cookie:
             http-only: true
-
+    
 
 # ===================================================================
 # JHipster specific properties

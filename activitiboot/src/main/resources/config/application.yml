@@ -1,7 +1,8 @@
 # ===================================================================
 # Spring Boot configuration.
 #
-# This configuration is used for unit/integration tests.
+# This configuration will be overriden by the Spring profile you use,
+# for example application-dev.yml if you use the "dev" profile.
 #
 # More information on profiles: https://jhipster.github.io/profiles/
 # More information on configuration properties: https://jhipster.github.io/common-application-properties/
@@ -15,60 +16,54 @@
 
 eureka:
     client:
-        enabled: false
+        enabled: true
+        healthcheck:
+            enabled: true
+        fetch-registry: true
+        register-with-eureka: true
+        instance-info-replication-interval-seconds: 10
+        registry-fetch-interval-seconds: 10
     instance:
-        appname: frontend
-        instanceId: frontend:${spring.application.instance-id:${random.value}}
+        appname: activitiboot
+        instanceId: activitiboot:${spring.application.instance-id:${random.value}}
+        lease-renewal-interval-in-seconds: 5
+        lease-expiration-duration-in-seconds: 10
+        status-page-url-path: ${management.context-path}/info
+        health-check-url-path: ${management.context-path}/health
+        metadata-map:
+            profile: ${spring.profiles.active}
+            version: ${info.project.version}
+ribbon:
+    eureka:
+        enabled: true
+# See https://github.com/Netflix/Hystrix/wiki/Configuration
+#hystrix:
+#    command:
+#        default:
+#            execution:
+#                isolation:
+#                    thread:
+#                        timeoutInMilliseconds: 10000
 
+management:
+    security:
+        roles: ADMIN
+    context-path: /management
+    health:
+        mail:
+            enabled: false # When using the MailService, configure an SMTP server and set this to true
 spring:
     application:
-        name: frontend
-    autoconfigure:
-        exclude: org.springframework.boot.autoconfigure.data.cassandra.CassandraDataAutoConfiguration, org.springframework.boot.autoconfigure.cassandra.CassandraAutoConfiguration
+        name: activitiboot
     jackson:
         serialization.write_dates_as_timestamps: false
-    cache:
-        type: none
-    datasource:
-        type: com.zaxxer.hikari.HikariDataSource
-        url: jdbc:h2:mem:frontend;DB_CLOSE_DELAY=-1
-        name:
-        username:
-        password:
     jpa:
-        database-platform: io.github.jhipster.domain.util.FixedH2Dialect
-        database: H2
         open-in-view: false
-        show-sql: false
         hibernate:
             ddl-auto: none
             naming:
                 physical-strategy: org.springframework.boot.orm.jpa.hibernate.SpringPhysicalNamingStrategy
                 implicit-strategy: org.springframework.boot.orm.jpa.hibernate.SpringImplicitNamingStrategy
-        properties:
-            hibernate.id.new_generator_mappings: true
-            hibernate.cache.use_second_level_cache: false
-            hibernate.cache.use_query_cache: false
-            hibernate.generate_statistics: true
-            hibernate.hbm2ddl.auto: validate
-    data:
-        cassandra:
-            contactPoints: localhost
-            port: 0
-            protocolVersion: V4
-            compression: NONE
-            keyspaceName: cassandra_unit_keyspace
-            repositories:
-                enabled: false
-        elasticsearch:
-            cluster-name:
-            cluster-nodes:
-            properties:
-                path:
-                  logs: target/elasticsearch/log
-                  data: target/elasticsearch/data
-    mail:
-        host: localhost
     messages:
         basename: i18n/messages
     mvc:
@@ -77,16 +72,15 @@ spring:
     thymeleaf:
         mode: XHTML
 
-liquibase:
-    contexts: test
-
 security:
     basic:
         enabled: false
 
 server:
-    port: 10344
-    address: localhost
+    session:
+        cookie:
+            http-only: true
+
 
 # ===================================================================
 # JHipster specific properties
@@ -96,17 +90,32 @@ server:
 
 jhipster:
     async:
-        core-pool-size: 1
+        core-pool-size: 2
         max-pool-size: 50
         queue-capacity: 10000
-    security:
-        authentication:
-            jwt:
-                secret: ad071a95b1a832ed55edf7cc7693e6e1614d887f
-                # Token is valid 24 hours
-                token-validity-in-seconds: 86400
-    metrics: # DropWizard Metrics configuration, used by MetricsConfiguration
-        jmx.enabled: true
+    # By default CORS is disabled. Uncomment to enable.
+    #cors:
+        #allowed-origins: "*"
+        #allowed-methods: GET, PUT, POST, DELETE, OPTIONS
+        #allowed-headers: "*"
+        #exposed-headers:
+        #allow-credentials: true
+        #max-age: 1800
+    mail:
+        from: activitiboot@localhost
+    swagger:
+        default-include-pattern: /api/.*
+        title: activitiboot API
+        description: activitiboot API documentation
+        version: 0.0.1
+        terms-of-service-url:
+        contact-name:
+        contact-url:
+        contact-email:
+        license:
+        license-url:
+    ribbon:
+        display-on-active-profiles: dev
 
 # ===================================================================
 # Application specific properties
@@ -118,4 +127,3 @@ jhipster:
 # ===================================================================
 
 application:
-

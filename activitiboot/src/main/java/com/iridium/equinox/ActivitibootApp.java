@@ -1,55 +1,43 @@
 package com.iridium.equinox;
 
-import java.net.InetAddress;
-import java.net.UnknownHostException;
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.List;
-
-import javax.annotation.PostConstruct;
-
-import org.camunda.bpm.engine.RepositoryService;
-import org.camunda.bpm.engine.RuntimeService;
-import org.camunda.bpm.engine.TaskService;
-import org.camunda.bpm.engine.repository.ProcessDefinition;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.BeanFactory;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.CommandLineRunner;
-import org.springframework.boot.SpringApplication;
-import org.springframework.boot.actuate.autoconfigure.MetricFilterAutoConfiguration;
-import org.springframework.boot.actuate.autoconfigure.MetricRepositoryAutoConfiguration;
-import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
-import org.springframework.boot.autoconfigure.liquibase.LiquibaseProperties;
-import org.springframework.boot.context.properties.EnableConfigurationProperties;
-import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.ComponentScan;
-import org.springframework.core.env.Environment;
-
 import com.iridium.equinox.config.ApplicationProperties;
 import com.iridium.equinox.config.DefaultProfileUtil;
 
 import io.github.jhipster.config.JHipsterConstants;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.actuate.autoconfigure.*;
+import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
+import org.springframework.boot.autoconfigure.liquibase.LiquibaseProperties;
+import org.springframework.boot.context.properties.EnableConfigurationProperties;
+import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
+import org.springframework.context.annotation.ComponentScan;
+import org.springframework.core.env.Environment;
+
+import javax.annotation.PostConstruct;
+import java.net.InetAddress;
+import java.net.UnknownHostException;
+import java.util.Arrays;
+import java.util.Collection;
+
 @ComponentScan
 @EnableAutoConfiguration(exclude = {MetricFilterAutoConfiguration.class, MetricRepositoryAutoConfiguration.class})
 @EnableConfigurationProperties({LiquibaseProperties.class, ApplicationProperties.class})
 @EnableDiscoveryClient
-public class ProcessengineApp {
+public class ActivitibootApp {
 
-    private static final Logger log = LoggerFactory.getLogger(ProcessengineApp.class);
+    private static final Logger log = LoggerFactory.getLogger(ActivitibootApp.class);
 
     private final Environment env;
 
-    public ProcessengineApp(Environment env) {
+    public ActivitibootApp(Environment env) {
         this.env = env;
     }
 
     /**
-     * Initializes processengine.
+     * Initializes activitiboot.
      * <p>
      * Spring profiles can be configured with a program arguments --spring.profiles.active=your-active-profile
      * <p>
@@ -75,16 +63,13 @@ public class ProcessengineApp {
      * @throws UnknownHostException if the local host name could not be resolved into an address
      */
     public static void main(String[] args) throws UnknownHostException {
-        SpringApplication app = new SpringApplication(ProcessengineApp.class);
+        SpringApplication app = new SpringApplication(ActivitibootApp.class);
         DefaultProfileUtil.addDefaultProfile(app);
         Environment env = app.run(args).getEnvironment();
         String protocol = "http";
-        
         if (env.getProperty("server.ssl.key-store") != null) {
             protocol = "https";
         }
-       
-
         log.info("\n----------------------------------------------------------\n\t" +
                 "Application '{}' is running! Access URLs:\n\t" +
                 "Local: \t\t{}://localhost:{}\n\t" +
@@ -101,9 +86,6 @@ public class ProcessengineApp {
         String configServerStatus = env.getProperty("configserver.status");
         log.info("\n----------------------------------------------------------\n\t" +
                 "Config Server: \t{}\n----------------------------------------------------------",
-            configServerStatus == null ? "Not found or not setup for this application" : configServerStatus);  
-
+            configServerStatus == null ? "Not found or not setup for this application" : configServerStatus);
     }
-    
-    
 }
